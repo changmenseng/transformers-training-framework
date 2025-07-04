@@ -1,6 +1,4 @@
 #!/bin/bash
-source /etc/ssd1/jiangzhongtao/anaconda3/bin/activate
-echo $(which torchrun)
 
 set -e
 
@@ -26,7 +24,7 @@ data_args="
 "
 
 train_args="
-    --deepspeed /etc/ssd1/jiangzhongtao/code_framework/train/transformers/script/config_zero1.json \
+    --deepspeed script/config_zero1.json \
     --lora_tune True \
     --lora_rank 64 \
     --lora_dropout 0.1 \
@@ -49,7 +47,7 @@ train_args="
 
 torchrun \
     $distributed_args \
-    /etc/ssd1/jiangzhongtao/code_framework/train/transformers/script/run.py \
+    script/run.py \
     $model_args \
     $data_args \
     $train_args
